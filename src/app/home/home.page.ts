@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: "app-home",
@@ -10,17 +11,37 @@ export class HomePage implements OnInit {
 
   public numero1: number;
   public numero2: number;
-  public numero3: number;
   public operacao: string;
 
-  constructor() {}
+  constructor(public alertController: AlertController) {}
 
-  vaiFormulario() {
-    console.log(this.operacao);
-    //template strings!
-    let total = this.numero1 + this.numero2 + this.numero3;
-    const texto = `O valor total da conta é de ${total}`;
+  async vaiFormulario() {
+    let total = 0;
 
-    console.log(texto);
+    switch(this.operacao) {
+      case "add" : 
+        total = this.numero1 + this.numero2;
+        break;
+      case "sub" :
+        total = this.numero1 - this.numero2;
+        break;
+      case "mul" :
+        total = this.numero1 * this.numero2;
+        break;
+      case "div" :
+        total = this.numero1 / this.numero2;
+        break;
+      default:
+        total = 0;
+    }
+
+    const alert = await this.alertController.create({
+      header: 'O resultado é de:',
+      message: total,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
   }
 }
