@@ -10,6 +10,7 @@ export class HomePage implements OnInit {
 
   public numero1: number;
   public numero2: number;
+  public numero3: number;
   public operacao: string;
 
   constructor() {}
@@ -17,7 +18,7 @@ export class HomePage implements OnInit {
   vaiFormulario() {
     console.log(this.operacao);
     //template strings!
-    let total = this.numero1 + this.numero2;
+    let total = this.numero1 + this.numero2 + this.numero3;
     const texto = `O valor total da conta é de ${total}`;
 
     console.log(texto);
